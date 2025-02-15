@@ -4,7 +4,7 @@ import datetime
 st.set_page_config(page_title = "Hestia")
 st.title("Hestia ~")
 st.write("Your planet tamagotchi!")
-
+st.image(".\planet.png")
 st.sidebar.success("Select Page")
 #st.sidebar.success("Select a page above ☝️ to navigate.")
 
