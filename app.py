@@ -1,4 +1,5 @@
 import streamlit as st
+import datetime
 
 st.title("Hestia ~")
 st.write("Your planet tamagotchi!")
@@ -15,12 +16,17 @@ if "visibility" not in st.session_state:
 if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
+if "journal_entries" not in st.session_state:
+    st.session_state.journal_entries = []
 
 def toggle_sidebar_todo():
     st.session_state.sidebar_state = not st.session_state.sidebar_state
 
 def toggle_sidebar_journal():
     st.session_state.journal = not st.session_state.journal
+
+def new_journal():
+    st.text_area("Write your journal entry:")
 
 
 object_list = []
@@ -48,10 +54,8 @@ if st.session_state.sidebar_state:
             placeholder="Enter an item here",
             )
         
-        if st.button("Add Task"):
-            if text_input:  # Ensure input is not empty
-                st.session_state.tasks.append({"task": text_input, "completed": False})
-                #st.rerun()  # Refresh page
+        if text_input:  # Ensure input is not empty
+            st.session_state.tasks.append({"task": text_input, "completed": False})
         
 
         st.subheader("Your Tasks:")
@@ -73,5 +77,10 @@ if st.session_state.sidebar_state:
 if st.session_state.journal:
     with st.sidebar:
         st.write("### Journal")
-        st.write("This is your journal. You can add journal entries by pressing []. More entries will allow your planet to thrive!")
+        st.write("This is your journal. You can add journal entries by pressing New Entry. More entries will allow your planet to thrive!")
+        
+        st.button("New Entry", on_click=new_journal)
+
+
         st.button("Close Journal", on_click=toggle_sidebar_journal)
+
