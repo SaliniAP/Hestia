@@ -1,9 +1,12 @@
 import streamlit as st
 import datetime
 
+st.set_page_config(page_title = "Hestia")
 st.title("Hestia ~")
 st.write("Your planet tamagotchi!")
 
+st.sidebar.success("Select Page")
+#st.sidebar.success("Select a page above ☝️ to navigate.")
 
 if "sidebar_state" not in st.session_state:
     st.session_state.sidebar_state = 'collapsed'
@@ -19,6 +22,11 @@ if "tasks" not in st.session_state:
 if "journal_entries" not in st.session_state:
     st.session_state.journal_entries = []
 
+if "journal_page" not in st.session_state:
+    st.session_state.journal_page = "collapsed"
+
+
+
 def toggle_sidebar_todo():
     st.session_state.sidebar_state = not st.session_state.sidebar_state
 
@@ -26,12 +34,17 @@ def toggle_sidebar_journal():
     st.session_state.journal = not st.session_state.journal
 
 def new_journal():
-    st.text_area("Write your journal entry:")
+    entry_text = st.text_area("Write your journal entry:")
+    if st.button("Save Entry"):
+        if entry_text.strip():  # Ensure input is not empty
+            entry = {
+                "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "text": entry_text,
+            }
+            st.session_state.journal_entries.append(entry)
+            #st.experimental_rerun()  # Refresh page
 
 
-object_list = []
-print (f"object_list:{object_list}")
-print (f"type:{type(object_list)}")
 # Sidebar content (only shown when sidebar_state is True)
 left, right = st.columns(2)
 with left:
