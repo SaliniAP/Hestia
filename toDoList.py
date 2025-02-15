@@ -28,17 +28,16 @@ class TaskList:
     def printList(self):
         print(self._tasklist)
 
-def main():
-
-    # test object (comment out later)
+def main(*args):
     todo = TaskList()
-    f = open("toDo.out", "w")
+
+    # reading from stdin: task list items
+    for arg in args:
+        todo.addTask(arg)
+    
+    f = open("list.out", "w")
     sys.stdout = f
-    todo.printList()
-    todo.addTask("Complete this Implementation")
-    todo.printList()
-    todo.setStatus(0)
-    todo.printList()
+    todo.printList
     f.close()
 
 main()
