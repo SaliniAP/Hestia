@@ -29,6 +29,8 @@ class TaskList:
         print(self._tasklist)
 
 def main():
+
+    # test object (comment out later)
     todo = TaskList()
     f = open("toDo.out", "w")
     sys.stdout = f
