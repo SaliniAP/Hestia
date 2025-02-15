@@ -2,10 +2,11 @@ import streamlit as st
 import datetime
 
 st.set_page_config(page_title = "Hestia")
-st.title("Hestia ~")
-st.write("Your planet tamagotchi!")
-st.image(".\planet.png")
-st.sidebar.success("Select Page")
+st.title(":green[Hestia] ")
+st.write("_Your planet tamagotchi!_")
+
+st.image("./planet.png")
+st.sidebar.success("Select A Page 👆")
 #st.sidebar.success("Select a page above ☝️ to navigate.")
 
 if "sidebar_state" not in st.session_state:
@@ -42,7 +43,8 @@ def new_journal():
                 "text": entry_text,
             }
             st.session_state.journal_entries.append(entry)
-            #st.experimental_rerun()  # Refresh page
+            st.success("Journal entry saved!")
+            st.sidebar.success("Go to 'journal' to see your entries.")
 
 
 # Sidebar content (only shown when sidebar_state is True)
@@ -97,3 +99,9 @@ if st.session_state.journal:
 
         st.button("Close Journal", on_click=toggle_sidebar_journal)
 
+## Planet health
+st.write("Your planet's health")
+metric1, metric2, metric3 = st.columns(3)
+metric1.metric(label="Health", value="50", delta="1")
+metric2.metric(label="To-Do Items", value = "10", delta="4")
+metric3.metric(label="Journal Entries", value='3', delta='1')
