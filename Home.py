@@ -6,7 +6,7 @@ st.title(":green[Hestia] ")
 st.write("_Your planet tamagotchi!_")
 
 st.image("./planet.png")
-st.sidebar.success("Select A Page 👆")
+st.sidebar.success("Got something on your mind 👆")
 #st.sidebar.success("Select a page above ☝️ to navigate.")
 
 if "sidebar_state" not in st.session_state:
@@ -71,5 +71,5 @@ if st.session_state.sidebar_state:
 st.write("Your planet's health")
 metric1, metric2, metric3 = st.columns(3)
 metric1.metric(label="Health", value="50", delta="1")
-metric2.metric(label="To-Do Items", value = "10", delta="4")
-metric3.metric(label="Journal Entries", value='3', delta='1')
+metric2.metric(label="To-Do Items", value = str(len(st.session_state.tasks)), delta="1")
+metric3.metric(label="Journal Entries", value=str(len(st.session_state.passages)), delta='1')
