@@ -57,7 +57,7 @@ if st.session_state.sidebar_state:
                 # Checkbox for task completion
                 completed = st.checkbox(task["task"], value=task["completed"], key=f"task_{index}")
                 # Update task status
-                st.session_state.tasks[index]["completed"] = not(completed)
+                st.session_state.tasks[index]["completed"] = completed
                 with placeholder.container():
                     st.image("flowerplanet.png")
             # Button to remove completed tasks
