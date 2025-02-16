@@ -34,18 +34,24 @@ def toggle_sidebar_todo():
 def toggle_sidebar_journal():
     st.session_state.journal = not st.session_state.journal
 
-def new_journal():
-    entry_text = st.text_area("Write your journal entry:")
-    if st.button("Save Entry"):
-        if entry_text.strip():  # Ensure input is not empty
-            entry = {
-                "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "text": entry_text,
-            }
-            st.session_state.journal_entries.append(entry)
-            st.success("Journal entry saved!")
-            st.sidebar.success("Go to 'journal' to see your entries.")
+def save_entry(entry_text):
+    if entry_text:
+        st.toast("Journal entry saved!")
+        entry = {
+            "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "text": entry_text,
+        }
 
+        st.session_state.journal_entries.append(entry)
+        st.success("Journal entry saved!")
+        st.sidebar.success("Go to 'journal' to see your entries.")
+
+def new_journal():
+    with st.container():
+        entry_text = st.text_area("Write your journal entry:")
+        st.write(f"You wrote {len(entry_text)} characters.")
+        st.button("Save Entry", help="Save your entry", on_click=save_entry(entry_text))
+    
 
 # Sidebar content (only shown when sidebar_state is True)
 left, right = st.columns(2)
@@ -95,8 +101,7 @@ if st.session_state.journal:
         st.write("This is your journal. You can add journal entries by pressing New Entry. More entries will allow your planet to thrive!")
         
         st.button("New Entry", on_click=new_journal)
-
-
+        #st.rerun()
         st.button("Close Journal", on_click=toggle_sidebar_journal)
 
 ## Planet health
