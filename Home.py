@@ -4,8 +4,9 @@ import datetime
 st.set_page_config(page_title = "Hestia")
 st.title(":green[Hestia] ")
 st.write("_Your planet tamagotchi!_")
-
-st.image("./planet.png")
+placeholder = st.empty()
+with placeholder.container():
+    st.image("planet.png")
 st.sidebar.success("Select A Page 👆")
 #st.sidebar.success("Select a page above ☝️ to navigate.")
 
@@ -55,9 +56,10 @@ if st.session_state.sidebar_state:
             for index, task in enumerate(st.session_state.tasks):
                 # Checkbox for task completion
                 completed = st.checkbox(task["task"], value=task["completed"], key=f"task_{index}")
-
                 # Update task status
-                st.session_state.tasks[index]["completed"] = completed
+                st.session_state.tasks[index]["completed"] = not(completed)
+                with placeholder.container():
+                    st.image("flowerplanet.png")
             # Button to remove completed tasks
         if st.button("Remove Completed Tasks"):
             st.session_state.tasks = [task for task in st.session_state.tasks if not task["completed"]]
