@@ -21,6 +21,8 @@ if "visibility" not in st.session_state:
 if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
+if "passages" not in st.session_state:
+    st.session_state.passages = []
 
 
 def toggle_sidebar_todo():
