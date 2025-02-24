@@ -20,5 +20,8 @@ The web-app incentives the user to do basic chores they've been meaning to get t
 🕹️ *What is it built with?*  
 We built this using Python 3 (specifically 3.11). The main packages we used are Panadas and StreamLit. 
 
+📧 *How can I learn more?*
+To learn more about ElleHacks, you can visit: https://ellehacks.com/  
+
 👾 *AI Notice*  
 The code to build the web-app was partially written by AI, specifically ChatGPT. ChatGPT was also consulted for information on building the program.  
